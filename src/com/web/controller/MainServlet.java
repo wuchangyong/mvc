@@ -426,4 +426,21 @@ public class MainServlet extends HttpServlet{
 		resp.getWriter().flush();
 	}
 	
+	
+	/**
+	 * 
+	 * @param req
+	 * @param resp
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public void loadAllDept2(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		List<Dept> deptList = userModel.loadAllDept();
+		deptList.add(0, new Dept(-1, "请选择部门", null));
+		resp.setCharacterEncoding("utf-8");
+		resp.getWriter().write(JSONArray.fromObject(deptList).toString());
+		resp.getWriter().flush();
+	}
+	
 }
