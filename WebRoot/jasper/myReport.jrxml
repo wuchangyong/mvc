@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="myReport" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="351fe6fc-f795-407b-aca5-cbb317bcadfb">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="85"/>
+	<style name="columnheaderStyle" forecolor="#F0F0F0" backcolor="#0066FF" fontSize="10" isItalic="false" isUnderline="false"/>
+	<queryString>
+		<![CDATA[SELECT
+     tb_user.`uid` AS tb_user_uid,
+     tb_user.`userName` AS tb_user_userName,
+     tb_user.`userPass` AS tb_user_userPass,
+     tb_user.`sex` AS tb_user_sex,
+     tb_user.`email` AS tb_user_email,
+     tb_user.`education` AS tb_user_education,
+     tb_user.`hobbys` AS tb_user_hobbys,
+     tb_user.`description` AS tb_user_description,
+     tb_user.`avatar` AS tb_user_avatar
+FROM
+     `tb_user` tb_user]]>
+	</queryString>
+	<field name="uid" class="java.lang.Integer"/>
+	<field name="userName" class="java.lang.String"/>
+	<field name="userPass" class="java.lang.String"/>
+	<field name="sex" class="java.lang.Integer"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="education" class="java.lang.Integer"/>
+	<field name="hobbys" class="java.lang.String"/>
+	<field name="description" class="java.lang.String"/>
+	<field name="avatar" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="a1054a33-8b65-4992-9148-d255a4d14561" x="25" y="20" width="100" height="20" forecolor="#3366FF" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[用户编号]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="afddbb3f-4930-4ec2-822f-980cf5a2c2cc" x="225" y="20" width="100" height="20" forecolor="#3366FF"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[性别]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6726bba3-71e5-4d40-b863-6e04746e1e8c" mode="Transparent" x="325" y="20" width="100" height="20" forecolor="#3366FF" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[邮箱]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cde324a0-6f9c-4c4b-800c-9902c3d45831" mode="Transparent" x="425" y="20" width="100" height="20" forecolor="#3366FF" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[学历]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="28cbfa2c-d6de-4cde-9e8d-b06e2b12ef01" mode="Transparent" x="525" y="20" width="100" height="20" forecolor="#3366FF" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[爱好]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7f38edab-369b-4e01-baca-8dac5221ea64" mode="Transparent" x="625" y="20" width="100" height="20" forecolor="#3366FF" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[个人简介]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6f1c1b0d-d161-4172-8283-8d3005bb8c4c" mode="Transparent" x="725" y="20" width="100" height="20" forecolor="#3366FF" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[头像]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b1c05bc0-e647-4dd0-9abf-4e32cad12ffc" mode="Transparent" x="125" y="20" width="100" height="20" forecolor="#3366FF" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[用户名]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement uuid="36a8bf4f-f954-456f-a1cd-b9931625e09b" x="25" y="81" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{uid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1d3d23e4-e1ef-4381-a808-34d798b370fb" x="125" y="81" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{userName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3c9753d5-f894-4337-8d24-c661317351b1" x="225" y="81" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{sex}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f4dc1e85-e60b-4eb4-9a38-7cc7c8397be1" x="325" y="81" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b750d1dc-82c9-4842-8b56-fc377a29b116" x="425" y="81" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{education}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ba6fe868-0309-4e7a-9697-d73d4db386af" x="525" y="81" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{hobbys}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="66ee73e0-0272-47dc-b75c-8d9736488611" x="625" y="81" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e80c34c1-8209-42cd-be48-55657d01006d" x="725" y="81" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{avatar}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
