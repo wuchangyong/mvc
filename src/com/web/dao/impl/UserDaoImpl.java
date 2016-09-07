@@ -245,7 +245,6 @@ public class UserDaoImpl implements UserDao{
 	public boolean checkUserMenu(int uid, String uri){
 		String sql = "select 1 from userrole ur,rolemenu rm,menu m where ur.rid=rm.rid and rm.mid=m.mid and ur.uid=? and m.url like '%" + uri + "%'";
 		List<Object[]> list = DBUtil.executeQuery(sql, new Object[]{uid});
-		System.out.println(uri + "============>"+list.size());
 		if(null != list && list.size() > 0){
 			return true;
 		}

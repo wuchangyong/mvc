@@ -3,8 +3,6 @@ package com.web.controller;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -84,10 +82,9 @@ public class MainServlet extends HttpServlet{
 		String userName = req.getParameter("userName");
 		String userPass = req.getParameter("userPass");
 		//2、查询数据库
-		System.out.println("LoginServlet控制层");
 		User user = userModel.loadUserByName(userName);
 		//3、根据第二步的结果判断 返回不同的页面并给出不同的提示
-		int result = 1;
+		//int result = 1;
 		if(null != user){
 			//用户名存在
 			if(userPass.equals(user.getUserPass())){
@@ -96,23 +93,23 @@ public class MainServlet extends HttpServlet{
 				req.getSession().setAttribute("menuList", menuList);
 				//保存数据  整个项目中都有效
 				req.getSession().setAttribute("loginUser", user);
-				//req.getRequestDispatcher("view/welcome.jsp").forward(req, resp);
-				result = 1;
+				req.getRequestDispatcher("view/welcome.jsp").forward(req, resp);
+				//result = 1;
 			}else{
 				//用户名正确 但密码错误
-				//req.setAttribute("loginError", "密码错误！");
-				//req.getRequestDispatcher("view/login.jsp").forward(req, resp);
-				result = 2;
+				req.setAttribute("loginError", "密码错误！");
+				req.getRequestDispatcher("view/login.jsp").forward(req, resp);
+				//result = 2;
 			}
 		}else{
 			//用户名不存在
-			//req.setAttribute("loginError", "用户名不存在！");
-			//req.getRequestDispatcher("view/login.jsp").forward(req, resp);
-			result = 3;
+			req.setAttribute("loginError", "用户名不存在！");
+			req.getRequestDispatcher("view/login.jsp").forward(req, resp);
+			//result = 3;
 		}
-		resp.setCharacterEncoding("utf-8");
-		resp.getWriter().write(result+"");
-		resp.getWriter().flush();
+		//resp.setCharacterEncoding("utf-8");
+		//resp.getWriter().write(result+"");
+		//resp.getWriter().flush();
 	}
 	
 	/**

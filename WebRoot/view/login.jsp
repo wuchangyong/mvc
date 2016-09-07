@@ -207,7 +207,7 @@ request.setAttribute("basePath",basePath);
 			}
 		}
 		//4.发送请求
-		xmlHttpRequest.send(null);*/
+		xmlHttpRequest.send(null);
 		$.post('${basePath}login.do',{
 			methodName:'login',
 			userName  :$("#un").val(),
@@ -220,7 +220,7 @@ request.setAttribute("basePath",basePath);
 			}else{
 				$("#loginError").html("用户名不存在！");
 			}
-		},"text");
+		},"text");*/
 	}
 </SCRIPT>
 
@@ -244,7 +244,7 @@ request.setAttribute("basePath",basePath);
 					<SPAN class="p_logo"></SPAN>
 					<INPUT class="ipt" id="password" type="password" placeholder="请输入密码" name="userPass">
 				</P>
-				<p style="color:#c00;font-size:16px;padding-top:5px;" id="loginError"></p>
+				<p style="color:#c00;font-size:16px;padding-top:5px;" id="loginError">${loginError}</p>
 				<DIV style="height: 50px; line-height: 50px; margin-top: 5px; border-top-color: rgb(231, 231, 231); border-top-width: 1px; border-top-style: solid;">
 					<P style="margin: 0px 35px 20px 45px;">
 						<SPAN style="float: left;">
@@ -252,8 +252,8 @@ request.setAttribute("basePath",basePath);
 						</SPAN>
 						<SPAN style="float: right;">
 							<A style="color: rgb(204, 204, 204); margin-right: 10px;" href="#">注册</A>
-							<%--<input type="submit" value="登录" style="background: rgb(0, 142, 173); padding: 7px 10px; border-radius: 4px; border: 1px solid rgb(26, 117, 152); border-image: none; color: rgb(255, 255, 255); font-weight: bold;cursor:pointer;"/> --%>
-							<A style="background: rgb(0, 142, 173); padding: 7px 10px; border-radius: 4px; border: 1px solid rgb(26, 117, 152); border-image: none; color: rgb(255, 255, 255); font-weight: bold;" href="javascript:login();">登录</A> 
+							<input type="submit" value="登录" style="background: rgb(0, 142, 173); padding: 7px 10px; border-radius: 4px; border: 1px solid rgb(26, 117, 152); border-image: none; color: rgb(255, 255, 255); font-weight: bold;cursor:pointer;"/> 
+							<%--<A style="background: rgb(0, 142, 173); padding: 7px 10px; border-radius: 4px; border: 1px solid rgb(26, 117, 152); border-image: none; color: rgb(255, 255, 255); font-weight: bold;" href="javascript:login();">登录</A> --%>
 						</SPAN>
 					</P>
 				</DIV>
