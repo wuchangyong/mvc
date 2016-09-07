@@ -16,7 +16,7 @@ request.setAttribute("basePath",basePath);
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<link rel="shortcut icon" href="<%=basePath%>alipay.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="<%=basePath%>alipay_32px.ico" type="image/x-icon" />
 	<link type="text/css" rel="stylesheet" href="<%=basePath%>easyui/themes/default/easyui.css"/>
 	<link type="text/css" rel="stylesheet" href="<%=basePath%>easyui/themes/icon.css"/>
 	<script type="text/javascript" src="<%=basePath%>easyui/jquery.min.js"></script>

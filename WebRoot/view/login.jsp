@@ -12,7 +12,7 @@ request.setAttribute("basePath",basePath);
 		<META content="IE=11.0000" http-equiv="X-UA-Compatible">
 		<META http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<TITLE>登录页面</TITLE>
-		<link rel="shortcut icon" href="<%=basePath%>alipay.ico" type="image/x-icon" />
+		<link rel="shortcut icon" href="<%=basePath%>alipay_32px.ico" type="image/x-icon" />
 		<SCRIPT src="<%=basePath%>view/js/jquery-1.9.1.min.js" type="text/javascript"></SCRIPT>
 		<STYLE>
 		body {
