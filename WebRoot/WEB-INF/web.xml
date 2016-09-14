@@ -11,12 +11,24 @@
   
   <servlet>
   	<servlet-name>main</servlet-name>
-  	<servlet-class>com.web.controller.MainServlet</servlet-class>
+  	<servlet-class>com.web.controller.UserServlet</servlet-class>
   </servlet>
   <servlet-mapping>
   	<servlet-name>main</servlet-name>
   	<url-pattern>*.do</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>menu</servlet-name>
+  	<servlet-class>com.web.controller.MenuServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>menu</servlet-name>
+  	<url-pattern>*.action</url-pattern>
+  </servlet-mapping>
+  
+  
+  
   
   <!-- 过滤器 -->
   <filter>

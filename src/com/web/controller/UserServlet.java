@@ -35,7 +35,7 @@ import com.web.vo.MenuVo;
  * 	LoginFilter过滤器中排除登录、注册、退出请求的拦截。
  */
 @SuppressWarnings("serial")
-public class MainServlet extends HttpServlet{
+public class UserServlet extends HttpServlet{
 	
 	//控制层持有一个模型层对象
 	private UserModel userModel = new UserModelImpl();
@@ -52,7 +52,7 @@ public class MainServlet extends HttpServlet{
 			throws ServletException, IOException {
 		//接收所有请求
 		String methodName = req.getParameter("methodName");
-		Class c = MainServlet.class;
+		Class c = UserServlet.class;
 		try {
 			Method m = c.getMethod(methodName, HttpServletRequest.class, HttpServletResponse.class);
 			m.invoke(this, req, resp);
@@ -223,77 +223,7 @@ public class MainServlet extends HttpServlet{
 		resp.sendRedirect("view/login.jsp");
 	}
 	
-	/**
-	 * 展示所有菜单
-	 * @param req
-	 * @param resp
-	 * @throws ServletException
-	 * @throws IOException
-	 */
-	public void showMenus(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		int pageNo = Integer.valueOf(req.getParameter("pageNo"));
-		int pageSize = Integer.valueOf(req.getParameter("pageSize"));
-		Page<MenuVo> page = userModel.loadAllMenus(pageNo, pageSize);
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("rows", page.getDataList());//easyui要求返回的分页数据键必须为rows
-		map.put("total", page.getTotal());//easyui要求返回分页总行数的键必须为total
-		
-		//String json = JSONArray.fromObject(menuList).toString();
-		String json = JSONObject.fromObject(map).toString();
-		
-		resp.setCharacterEncoding("utf-8");
-		resp.getWriter().write(json);
-		resp.getWriter().flush();
-		//req.setAttribute("menuList", menuList);
-		//req.getRequestDispatcher("view/showMenus.jsp").forward(req, resp);
-	}
 	
-	/**
-	 * 链接到添加菜单界面  动态加载所有一级和二级菜单
-	 * @param req
-	 * @param resp
-	 * @throws ServletException
-	 * @throws IOException
-	 */
-	public void toAddMenu(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		List<Menu> menuList = userModel.load12Menus();
-		menuList.add(0, new Menu(-1, "请选择父级菜单"));
-		//req.setAttribute("menuList", menuList);
-		//req.getRequestDispatcher("view/addMenu.jsp").forward(req, resp);
-		resp.setCharacterEncoding("utf-8");
-		resp.getWriter().write(JSONArray.fromObject(menuList).toString());
-		resp.getWriter().flush();
-	}
-	
-	/**
-	 * 添加菜单
-	 * @param req
-	 * @param resp
-	 * @throws ServletException
-	 * @throws IOException
-	 */
-	public void addMenu(HttpServletRequest req, HttpServletResponse resp)
-		throws ServletException, IOException {
-		
-		String name = req.getParameter("name");
-		System.out.println(name);
-		String url = req.getParameter("url");
-		String isshow = req.getParameter("isshow");
-		String parentid = req.getParameter("parentid");
-		int i = userModel.addMenu(name, url, Integer.valueOf(isshow), Integer.valueOf(parentid));
-		if(i == 1){
-			req.setAttribute("msg", "添加成功！");
-			//添加成功 跳转到菜单列表界面
-			this.showMenus(req, resp);
-		}else{
-			req.setAttribute("msg", "添加失败！");
-			//添加失败 跳转到添加界面
-			this.toAddMenu(req, resp);
-		}
-	}
 	
 	/**
 	 * 展示角色列表
