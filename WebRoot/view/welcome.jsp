@@ -28,12 +28,21 @@ request.setAttribute("basePath",basePath);
   	</style>
   	<script type="text/javascript">
   	function addTab(title,url){
-  		$('#tabs').tabs('add',{
-  			title   : title,
-  			selected: true,
-  			closable: true,
-  			content : "<iframe width='100%' height='100%' frameborder='0' scrolling='auto' src='"+url+"'></iframe>"
-  	  	});
+  	  	if($('#tabs').tabs("exists",title)){
+			//Tab页存在就选中并刷新一下
+			$('#tabs').tabs("select",title);
+			var tab = $('#tabs').tabs('getSelected');  // 获取选择的面板
+			//刷新当前tab
+	        $('#tabs').tabs('update', {tab:tab,options:{}});
+  	  	}else{
+  	  	  	//Tab页不存在就添加
+	  	  	$('#tabs').tabs('add',{
+	  			title   : title,
+	  			selected: true,
+	  			closable: true,
+	  			content : "<iframe width='100%' height='100%' frameborder='0' scrolling='auto' src='"+url+"'></iframe>"
+	  	  	});
+  	  	}
   	}
   	</script>
   </head>
