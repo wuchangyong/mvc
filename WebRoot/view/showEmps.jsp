@@ -37,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	$(function(){
   		$('#win').window('close');  // close a window 
   		$('#dg').datagrid({    
-  		    url:'showEmps.user?methodName=showEmps&pageNo=1&pageSize=10',
+  		    url:'showEmps.do?methodName=showEmps&pageNo=1&pageSize=10',
   		    frozenColumns:[[{field:'hhhh',checkbox:true}]],
   		    rownumbers:true,
   		    striped:true,
@@ -64,13 +64,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
   		//搜索和新增员工时下拉列表准备数据
   		$("#searchJob").combobox({
-			url:'loadAllJob.user?methodName=loadAllJob',
+			url:'loadAllJob.do?methodName=loadAllJob',
 			textField:'jname',
 			valueField:'jid',
 			value:'-1'
   	  	});
   		$("#searchDept").combobox({
-			url:'loadAllDept.user?methodName=loadAllDept',
+			url:'loadAllDept.do?methodName=loadAllDept',
 			textField:'deptName',
 			valueField:'deptid',
 			value:'-1'
@@ -79,7 +79,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	//刷新表格数据
   	function refreshData(pageNo, pageSize){
   		$('#dg').datagrid('loading');
-		$.post("showEmps.user",{
+		$.post("showEmps.do",{
 			methodName:'showEmps',
 			pageNo:pageNo,
 			pageSize:pageSize
@@ -94,7 +94,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	}
   	//组合条件搜索
   	function search(){
-		$.post("showEmps.user",{
+		$.post("showEmps.do",{
 			methodName :'showEmps',
 			pageNo     :1,
 			pageSize   :10,

@@ -37,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	$(function(){
   		//$('#win').window('close');  // close a window 
   		$('#dg').datagrid({    
-  		    url:'showUsers.user?methodName=showUsers',
+  		    url:'showUsers.do?methodName=showUsers',
   		    frozenColumns:[[{field:'hhhh',checkbox:true}]],
   		    rownumbers:true,
   		    striped:true,
@@ -56,7 +56,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				text:'导出为Excel报表',
 				iconCls:'icon-export',
 				handler:function(){
-					window.location.href = "<%=basePath%>exportReport.user?methodName=exportReport";
+					window.location.href = "<%=basePath%>exportReport.do?methodName=exportReport";
 				}
 		  	}]
 	  	  		    
@@ -72,7 +72,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	//刷新表格数据
   	function refreshData(pageNo, pageSize){
   		$('#dg').datagrid('loading');
-		$.post("showUsers.user",{
+		$.post("showUsers.do",{
 			methodName:'showUsers',
 			pageNo:pageNo,
 			pageSize:pageSize

@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   	  <p style="color:#c00;">${msg }</p>
-      <form action="<%=basePath%>insertMenu.menu" method="post">
+      <form action="<%=basePath%>insertMenu.do" method="post">
       	  <input type="hidden" name="methodName" value="addMenu"/>
       	  <table>
       	  	  <tr>

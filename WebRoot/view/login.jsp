@@ -234,7 +234,7 @@ request.setAttribute("basePath",basePath);
 				<DIV class="initial_left_hand" id="left_hand"></DIV>
 				<DIV class="initial_right_hand" id="right_hand"></DIV>
 			</DIV>
-			<form action="<%=basePath%>login.user" method="post">
+			<form action="<%=basePath%>login.do" method="post">
 				<input type="hidden" name="methodName" value="login" />
 				<P style="padding: 30px 0px 10px; position: relative;">
 					<SPAN class="u_logo"></SPAN>
