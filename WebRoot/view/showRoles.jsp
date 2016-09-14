@@ -39,8 +39,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       	  		<td>${r.rid}</td>
       	  		<td>${r.rname}</td>
       	  		<td>
-      	  			<a href="<%=basePath%>loadUserRole.do?methodName=loadUserRole&rid=${r.rid}">修改角色用户</a>
-      	  			<a href="<%=basePath%>loadRoleMenu.do?methodName=loadRoleMenu&rid=${r.rid}">修改角色菜单</a>
+      	  			<a href="<%=basePath%>loadUserRole.menu?methodName=loadUserRole&rid=${r.rid}">修改角色用户</a>
+      	  			<a href="<%=basePath%>loadRoleMenu.menu?methodName=loadRoleMenu&rid=${r.rid}">修改角色菜单</a>
       	  		</td>
       	  	</tr>
       	  </c:forEach>

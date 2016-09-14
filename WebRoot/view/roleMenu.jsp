@@ -26,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   	  <p style="color:#c00;">${msg}</p>
   	  <p>角色名称：<b style="color:#c00;">${role.rname}</b>，编辑角色菜单：</p>
-      <form action="<%=basePath%>editRoleMenu.do" method="post">
+      <form action="<%=basePath%>editRoleMenu.menu" method="post">
       	  <input type="hidden" name="methodName" value="editRoleMenu">
       	  <input type="hidden" name="rid" value="${role.rid}">
       	  <c:forEach items="${roleMenuList}" var="rm">

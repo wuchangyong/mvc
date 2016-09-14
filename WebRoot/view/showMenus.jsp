@@ -37,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	$(function(){
   		$('#win').window('close');  // close a window 
   		$('#dg').datagrid({    
-  		    url:'showMenus.do?methodName=showMenus&pageNo=1&pageSize=10',
+  		    url:'showMenus.menu?methodName=showMenus&pageNo=1&pageSize=10',
   		    frozenColumns:[[{field:'hhhh',checkbox:true}]],
   		    rownumbers:true,
   		    striped:true,
@@ -86,7 +86,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
   		//添加菜单时加载父级菜单列表
   		$("#parentid").combobox({
-			url:'toAddMenu.do?methodName=toAddMenu',
+			url:'toAddMenu.menu?methodName=toAddMenu',
 			textField:'name',
 			valueField:'mid',
 			value:'-1'
@@ -95,7 +95,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	//刷新表格数据
   	function refreshData(pageNo, pageSize){
   		$('#dg').datagrid('loading');
-		$.post("showMenus.do",{
+		$.post("showMenus.menu",{
 			methodName:'showMenus',
 			pageNo:pageNo,
 			pageSize:pageSize
