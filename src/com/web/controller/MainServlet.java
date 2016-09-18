@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
+import com.alibaba.fastjson.JSON;
 import com.web.entity.Dept;
 import com.web.entity.Job;
 import com.web.entity.Menu;
@@ -134,7 +132,7 @@ public class MainServlet extends HttpServlet{
 		
 		
 		resp.setCharacterEncoding("utf-8");
-		resp.getWriter().write(JSONObject.fromObject(map).toString());
+		resp.getWriter().write(JSON.toJSONString(map));
 		resp.getWriter().flush();
 //		req.setAttribute("userList", userList);
 //		req.setAttribute("date", new Date());
@@ -243,7 +241,7 @@ public class MainServlet extends HttpServlet{
 		map.put("total", page.getTotal());//easyui要求返回分页总行数的键必须为total
 		
 		//String json = JSONArray.fromObject(menuList).toString();
-		String json = JSONObject.fromObject(map).toString();
+		String json = JSON.toJSONString(map);//JSONObject.fromObject(map).toString();
 		
 		resp.setCharacterEncoding("utf-8");
 		resp.getWriter().write(json);
@@ -266,7 +264,8 @@ public class MainServlet extends HttpServlet{
 		//req.setAttribute("menuList", menuList);
 		//req.getRequestDispatcher("view/addMenu.jsp").forward(req, resp);
 		resp.setCharacterEncoding("utf-8");
-		resp.getWriter().write(JSONArray.fromObject(menuList).toString());
+		//JSONArray.fromObject(menuList).toString()
+		resp.getWriter().write(JSON.toJSONString(menuList));
 		resp.getWriter().flush();
 	}
 	
@@ -377,7 +376,9 @@ public class MainServlet extends HttpServlet{
 		map.put("total", page.getTotal());//easyui要求返回分页总行数的键必须为total
 		
 		//String json = JSONArray.fromObject(menuList).toString();
-		String json = JSONObject.fromObject(map).toString();
+		String json = JSON.toJSONString(map);
+			
+			//JSONObject.fromObject(map).toString();
 		
 		resp.setCharacterEncoding("utf-8");
 		resp.getWriter().write(json);
@@ -398,7 +399,8 @@ public class MainServlet extends HttpServlet{
 		List<Job> jobList = userModel.loadAllJob();
 		jobList.add(0, new Job(-1, "请选择职位"));
 		resp.setCharacterEncoding("utf-8");
-		resp.getWriter().write(JSONArray.fromObject(jobList).toString());
+		//JSONArray.fromObject(jobList).toString()
+		resp.getWriter().write(JSON.toJSONString(jobList));
 		resp.getWriter().flush();
 	}
 	
@@ -414,7 +416,8 @@ public class MainServlet extends HttpServlet{
 		List<Dept> deptList = userModel.loadAllDept();
 		deptList.add(0, new Dept(-1, "请选择部门", null));
 		resp.setCharacterEncoding("utf-8");
-		resp.getWriter().write(JSONArray.fromObject(deptList).toString());
+		//JSONArray.fromObject(deptList).toString()
+		resp.getWriter().write(JSON.toJSONString(deptList));
 		resp.getWriter().flush();
 	}
 }
