@@ -376,7 +376,7 @@ public class MainServlet extends HttpServlet{
 		map.put("total", page.getTotal());//easyui要求返回分页总行数的键必须为total
 		
 		//String json = JSONArray.fromObject(menuList).toString();
-		String json = JSON.toJSONString(map);
+		String json = JSON.toJSONString(map);     
 			
 			//JSONObject.fromObject(map).toString();
 		
