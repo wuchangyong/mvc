@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!--  
+	class标签的name属性填实体类全名，table属性填该实体类映射的表名称
+	其中每个列的标签都有name属性和column属性，name属性代表该实体类的某个属性名称，
+	column属性代表该表中的某个列名称，一个属性只能关联一个列且不能重复。主键列必须要
+	使用id标签并指定主键生成策略，其他列使用property标签。
+	-->
+	<class name="com.web.entity.User" table="tb_user">
+		<id name="uid" column="uid">
+			<generator class="identity"></generator>
+		</id>
+		<property name="userName" column="userName"></property>
+		<property name="userPass" column="userPass"></property>
+		<property name="sex" column="sex"></property>
+		<property name="email" column="email"></property>
+		<property name="education" column="education"></property>
+		<property name="hobbys" column="hobbys"></property>
+		<property name="description" column="description"></property>
+		<property name="avatar" column="avatar"></property>
+	</class>
+</hibernate-mapping>
