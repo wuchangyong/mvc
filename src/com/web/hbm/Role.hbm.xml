@@ -13,6 +13,6 @@
 		<id name="rid" column="rid">
 			<generator class="identity"></generator>
 		</id>
-		<property name="rname" column="rname"></property>
+		<property name="rname" column="rname" length="20" unique="true" not-null="true" type="java.lang.String"></property>
 	</class>
 </hibernate-mapping>

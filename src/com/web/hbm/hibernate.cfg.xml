@@ -15,14 +15,20 @@
 		<!-- 是否格式化sql语句 -->
 		<property name="format_sql">true</property>
 		
-		<!-- 引入实体映射文件，可以写多个 -->
+		<!-- 引入实体映射文件，可以写多个 
+		<mapping resource="com/web/hbm/Role.hbm.xml"/>
+		<mapping resource="com/web/hbm/Employee.hbm.xml"/>
+		-->
 		<mapping resource="com/web/hbm/User.hbm.xml"/>
 		<mapping resource="com/web/hbm/Menu.hbm.xml"/>
 		<mapping resource="com/web/hbm/Dept.hbm.xml"/>
-		<mapping resource="com/web/hbm/Employee.hbm.xml"/>
+		
 		<mapping resource="com/web/hbm/Job.hbm.xml"/>
-		<mapping resource="com/web/hbm/Role.hbm.xml"/>
 		<mapping resource="com/web/hbm/RoleMenu.hbm.xml"/>
 		<mapping resource="com/web/hbm/MenuVo.hbm.xml"/>
+		
+		<mapping class="com.web.entity.Role"/>
+		<mapping class="com.web.entity.Employee"/>
+		
 	</session-factory>
 </hibernate-configuration>
