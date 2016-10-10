@@ -6,6 +6,7 @@ import java.math.BigInteger;
 import java.util.List;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -181,21 +182,115 @@ public class BaseDao<T> {
 		return new Page<T>(pageNo, pageSize, list, total);
 	}
 	
+	/**
+	 * 通用的HQL查询方法（不分页）
+	 * @param hql
+	 * @param objects
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<T> hqlQuery(String hql, Object... objects){
+		session = sf.openSession();
+		Query query = session.createQuery(hql);
+		if(null != objects && objects.length > 0){
+			for(int i=0;i<objects.length;i++){
+				query.setParameter(i, objects[i]);
+			}
+		}
+		List<T> list = query.list();
+		session.close();
+		return list;
+	}
+	
+	/**
+	 * 通用的HQL查询方法（分页）
+	 * @param hql
+	 * @param objects
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public Page<T> hqlQuery(String hql, int pageNo, int pageSize, Object... objects){
+		session = sf.openSession();
+		/*
+		 * 查询总数量
+		 */
+		String sqlCount = "select count(*) " + removeSelect(hql);
+		Query query = session.createQuery(sqlCount);
+		if(null != objects && objects.length > 0){
+			for(int i=0;i<objects.length;i++){
+				query.setParameter(i, objects[i]);
+			}
+		}
+		long total = ((BigInteger)query.uniqueResult()).longValue();
+		
+		/*
+		 * 查询当前页的数据
+		 */
+		query = session.createQuery(hql);
+		if(null != objects && objects.length > 0){
+			for(int i=0;i<objects.length;i++){
+				query.setParameter(i, objects[i]);
+			}
+		}
+		List<T> list = query.setFirstResult((pageNo-1)*pageSize).setMaxResults(pageSize).list();
+		session.close();
+		return new Page<T>(pageNo, pageSize, list, total);
+	}
+	
+	/**
+	 * 通用的sql查询返回List<Object[]>
+	 * @param sql
+	 * @param objects
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Object[]> sqlQueryArray(String sql, Object... objects){
+		session = sf.openSession();
+		SQLQuery sqlQuery = session.createSQLQuery(sql);
+		if(null != objects && objects.length > 0){
+			for(int i=0;i<objects.length;i++){
+				sqlQuery.setParameter(i, objects[i]);
+			}
+		}
+		List<Object[]> list = sqlQuery.list();
+		session.close();
+		return list;
+	}
+	
 	
 	
 	
 	/**
 	 * 去掉sql语句的from关键字前面的内容
-	 * @param hql
+	 * 只支持select子句的子查询
+	 * @param sql
 	 * @return
 	 */
-	private static String removeSelect(String hql) {
-		int index = hql.toLowerCase().indexOf("from");
+	private static String removeSelect(String sql) {
+		int index = sql.toLowerCase().lastIndexOf("from");
 		if(index == -1){
 			throw new HibernateException("HQL语句必须包含关键字-from");
 		}
-		return hql.substring(index);
+		return sql.substring(index);
 	}
+	
+	
+	
+	
+	
+	
+	@SuppressWarnings("unchecked")
+	public static void main(String[] args) {
+		
+		UserDaoImpl bd = new UserDaoImpl();
+		Session session = bd.openSession();
+		String hql = "select e.ename,j.jobName,d.dname from Employee e,Job j,Dept d where e.jobid=j.jobid and e.deptid=d.did";
+		List<Object[]> list = session.createQuery(hql).list();
+		System.out.println(list.size());
+		session.close();
+	}
+	
+	
 	
 	
 }

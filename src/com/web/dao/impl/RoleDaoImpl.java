@@ -2,8 +2,6 @@ package com.web.dao.impl;
 
 import java.util.List;
 
-import org.hibernate.Session;
-
 import com.web.dao.RoleDao;
 import com.web.entity.Role;
 
@@ -28,19 +26,15 @@ public class RoleDaoImpl extends BaseDao<Role> implements RoleDao{
 		return roleList;
 	}
 	
+	
 	/**
 	 * 通过角色id查询角色菜单
 	 * @param rid
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	public List<Object[]> loadRoleMenuByRoleId(int rid){
 		String sql = "select m.mid,m.name,m.parentid,(select 1 from rolemenu rm where rm.mid=m.mid and rm.rid=?) from menu m";
-		Session session = this.openSession();
-		List<Object[]> list = session.createSQLQuery(sql).list();
-		session.close();
-		return list;
+		return this.sqlQueryArray(sql, rid);
 	}
-	
 	
 }

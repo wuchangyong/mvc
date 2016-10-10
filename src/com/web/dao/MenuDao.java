@@ -3,8 +3,6 @@ package com.web.dao;
 import java.util.List;
 
 import com.web.entity.Menu;
-import com.web.util.Page;
-import com.web.vo.MenuVo;
 
 public interface MenuDao {
 	/**
@@ -14,11 +12,6 @@ public interface MenuDao {
 	 */
 	public List<Menu> loadMenusByUid(int uid);
 	
-	/**
-	 * 加载所有菜单
-	 * @return
-	 */
-	public Page<MenuVo> loadAllMenus(int pageNo, int pageSize);
 	
 	/**
 	 * 加载所有一级和二级菜单

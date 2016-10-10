@@ -13,8 +13,8 @@ public class UserDaoImpl extends BaseDao<User> implements UserDao{
 	 * @return 返回null表示用户的帐号不存在 
 	 */
 	public User loadUserByName(String userName){
-		String sql = "select * from tb_user where userName=?";
-		List<User> list = this.sqlQuery(sql, userName);
+		String hql = "select u from User u where u.userName=?";
+		List<User> list = this.hqlQuery(hql, userName);
 		User user = null;
 		if(null != list && list.size() > 0){
 			user = list.get(0);
@@ -36,8 +36,8 @@ public class UserDaoImpl extends BaseDao<User> implements UserDao{
 	 */
 	@Override
 	public Page<User> loadAllUsers(int pageNo, int pageSize) {
-		String sql = "select * from tb_user";
-		return sqlQuery(sql, pageNo, pageSize);
+		String hql = "from User";
+		return hqlQuery(hql, pageNo, pageSize);
 	}
 	
 	/**

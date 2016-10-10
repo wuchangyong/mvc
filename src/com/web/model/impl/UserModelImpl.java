@@ -6,6 +6,7 @@ import com.web.dao.DeptDao;
 import com.web.dao.EmpDao;
 import com.web.dao.JobDao;
 import com.web.dao.MenuDao;
+import com.web.dao.MenuVoDao;
 import com.web.dao.RoleDao;
 import com.web.dao.RoleMenuDao;
 import com.web.dao.UserDao;
@@ -13,6 +14,7 @@ import com.web.dao.impl.DeptDaoImpl;
 import com.web.dao.impl.EmpDaoImpl;
 import com.web.dao.impl.JobDaoImpl;
 import com.web.dao.impl.MenuDaoImpl;
+import com.web.dao.impl.MenuVoDaoImpl;
 import com.web.dao.impl.RoleDaoImpl;
 import com.web.dao.impl.RoleMenuDaoImpl;
 import com.web.dao.impl.UserDaoImpl;
@@ -34,6 +36,8 @@ public class UserModelImpl implements UserModel{
 	private JobDao jobDao = new JobDaoImpl();
 	//模型层持有一个DAO层对象
 	private MenuDao menuDao = new MenuDaoImpl();
+	//模型层持有一个DAO层对象
+	private MenuVoDao menuVoDao = new MenuVoDaoImpl();
 	//模型层持有一个DAO层对象
 	private DeptDao deptDao = new DeptDaoImpl();
 	//模型层持有一个DAO层对象
@@ -91,7 +95,7 @@ public class UserModelImpl implements UserModel{
 	 * @return
 	 */
 	public Page<MenuVo> loadAllMenus(int pageNo, int pageSize){
-		return menuDao.loadAllMenus(pageNo, pageSize);
+		return menuVoDao.loadAllMenus(pageNo, pageSize);
 	}
 	
 	/**

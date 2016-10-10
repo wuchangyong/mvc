@@ -1,7 +1,6 @@
 package com.web.dao.impl;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -24,34 +23,7 @@ public class MenuDaoImpl extends BaseDao<Menu> implements MenuDao{
 		return menuList;
 	}
 	
-	/**
-	 * 加载所有菜单
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	public Page<MenuVo> loadAllMenus(int pageNo, int pageSize){
-		String sql1 = "select count(*) from v_menu";
-		//String sql1 = "select count(*) from menu";
-		String sql2 = "select * from v_menu";
-		//String sql2 = "select m.mid,m.name,m.url,m.isshow,m.level,(select m2.name from menu m2 where m2.mid=m.parentid) parentName from menu m;";
-		Session session = this.openSession();
-		List<BigInteger> count = session.createSQLQuery(sql1).list();
-		long total = count.get(0).longValue();
-		
-		
-		List<MenuVo> menuList = session.createSQLQuery(sql2).addEntity(MenuVo.class).setFirstResult((pageNo-1)*pageSize).setMaxResults(pageSize).list();
-//		List<MenuVo> menuList = new ArrayList<MenuVo>();
-//		List<Object[]> list = session.createSQLQuery(sql2).setFirstResult((pageNo-1)*pageSize).setMaxResults(pageSize).list();
-//		MenuVo m = null;
-//		if(null != list && list.size() > 0){
-//			for(Object[] os : list){
-//				m = new MenuVo((Integer)os[0], String.valueOf(os[1]), String.valueOf(os[2]), (Integer)os[3], (Integer)os[4], (String)os[5]);
-//				menuList.add(m);
-//			}
-//		}
-		session.close();
-		return new Page<MenuVo>(pageNo, pageSize, menuList, total);
-	}
+	
 	
 	/**
 	 * 加载所有一级和二级菜单
