@@ -2,20 +2,38 @@ package com.web.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 @SuppressWarnings("serial")
+@Entity
+@Table(name="menu")
 public class Menu implements Serializable{
+	
+	@Id
+	@Column(name="mid",unique=true,nullable=false)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int mid;
 	
+	@Column(name="name",length=30,nullable=false)
 	private String name;
 	
+	@Column(name="url",length=100)
 	private String url;
 	
 	//此菜单是否在欢迎界面左边的树形菜单中展示 1表示要展示 0表示不展示
+	@Column(name="isshow")
 	private int isshow = 1;
 	
+	@Column(name="level")
 	private int level;
 	
 	//此菜单的父级菜单id 若此菜单是根菜单 则此属性为-1
+	@Column(name="parentid")
 	private int parentid;
 
 	public Menu() {}

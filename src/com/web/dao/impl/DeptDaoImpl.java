@@ -12,7 +12,7 @@ public class DeptDaoImpl extends BaseDao<Dept> implements DeptDao{
 	 * @return
 	 */
 	public List<Dept> loadAllDept(){
-		return this.sqlQuery("select * from department");
+		return this.sqlQuery("select * from dept");
 	}
 	
 }

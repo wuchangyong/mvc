@@ -221,7 +221,7 @@ public class BaseDao<T> {
 				query.setParameter(i, objects[i]);
 			}
 		}
-		long total = ((BigInteger)query.uniqueResult()).longValue();
+		long total = (Long)query.uniqueResult();
 		
 		/*
 		 * 查询当前页的数据

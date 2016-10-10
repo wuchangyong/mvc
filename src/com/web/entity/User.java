@@ -2,25 +2,45 @@ package com.web.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 @SuppressWarnings("serial")
+@Entity
+@Table(name="tb_user")
 public class User implements Serializable{
 
+	@Id
+	@Column(name="uid",unique=true,nullable=false)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int uid;
 	
+	@Column(name="userName",unique=true,nullable=false,length=20)
 	private String userName;
 	
+	@Column(name="userPass",nullable=false,length=20)
 	private String userPass;
 	
+	@Column(name="sex")
 	private int sex;
 	
+	@Column(name="email",length=50)
 	private String email;
 	
+	@Column(name="education")
 	private int education;
 	
+	@Column(name="hobbys",length=30)
 	private String hobbys;
 	
+	@Column(name="description",length=100)
 	private String description;
 	
+	@Column(name="avatar",length=50)
 	private String avatar;
 
 	public User() {}

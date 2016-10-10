@@ -18,17 +18,21 @@
 		<!-- 引入实体映射文件，可以写多个 
 		<mapping resource="com/web/hbm/Role.hbm.xml"/>
 		<mapping resource="com/web/hbm/Employee.hbm.xml"/>
-		-->
-		<mapping resource="com/web/hbm/User.hbm.xml"/>
 		<mapping resource="com/web/hbm/Menu.hbm.xml"/>
 		<mapping resource="com/web/hbm/Dept.hbm.xml"/>
-		
 		<mapping resource="com/web/hbm/Job.hbm.xml"/>
 		<mapping resource="com/web/hbm/RoleMenu.hbm.xml"/>
+		<mapping resource="com/web/hbm/User.hbm.xml"/>
 		<mapping resource="com/web/hbm/MenuVo.hbm.xml"/>
+		-->
 		
+		<mapping class="com.web.entity.User"/>
 		<mapping class="com.web.entity.Role"/>
+		<mapping class="com.web.entity.RoleMenu"/>
 		<mapping class="com.web.entity.Employee"/>
-		
+		<mapping class="com.web.entity.Menu"/>
+		<mapping class="com.web.vo.MenuVo"/>
+		<mapping class="com.web.entity.Dept"/>
+		<mapping class="com.web.entity.Job"/>
 	</session-factory>
 </hibernate-configuration>

@@ -65,14 +65,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		//搜索和新增员工时下拉列表准备数据
   		$("#searchJob").combobox({
 			url:'loadAllJob.do?methodName=loadAllJob',
-			textField:'jname',
-			valueField:'jid',
+			textField:'jobName',
+			valueField:'jobid',
 			value:'-1'
   	  	});
   		$("#searchDept").combobox({
 			url:'loadAllDept.do?methodName=loadAllDept',
-			textField:'deptName',
-			valueField:'deptid',
+			textField:'dname',
+			valueField:'did',
 			value:'-1'
   	  	});
   	});

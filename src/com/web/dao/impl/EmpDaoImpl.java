@@ -39,10 +39,10 @@ public class EmpDaoImpl extends BaseDao<Employee> implements EmpDao{
 		
 		
 		String dataSql = "select e.eid,e.ename," +
-				"(select job.job_name from job where job.job_id=e.jobid)," +
+				"(select job.jobName from job where job.jobid=e.jobid)," +
 				"(select e2.ename from employee e2 where e2.eid=e.managerid)," +
 				"e.hireDate,e.salary,e.comm," +
-				"(select d.Name from department d where d.department_id=e.deptid) ";
+				"(select d.dname from dept d where d.did=e.deptid) ";
 		
 		//查询当前页的数据
 		List<Object[]> list = session.createSQLQuery(dataSql+sql.toString()).setFirstResult((pageNo-1)*pageSize).setMaxResults(pageSize).list();

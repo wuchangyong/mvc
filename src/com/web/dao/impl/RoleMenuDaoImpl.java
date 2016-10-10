@@ -23,7 +23,7 @@ public class RoleMenuDaoImpl extends BaseDao<RoleMenu> implements RoleMenuDao{
 		 * 先删除原来已有的菜单关联
 		 */
 		String sql = "delete from rolemenu where rid=?";
-		session.createSQLQuery(sql).executeUpdate();
+		session.createSQLQuery(sql).setInteger(0, rid).executeUpdate();
 		
 		/*
 		 * 再重新添加
