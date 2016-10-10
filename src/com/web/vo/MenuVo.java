@@ -5,9 +5,6 @@ import java.io.Serializable;
 public class MenuVo implements Serializable{
 	private int mid;
 	
-	
-	
-	
 	private String name;
 	
 	private String url;

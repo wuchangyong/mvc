@@ -191,7 +191,7 @@ public class MainServlet extends HttpServlet{
 	public void showDetails(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		String uid = req.getParameter("uid");
-		User user = userModel.loadUserByName(Integer.valueOf(uid));
+		User user = userModel.loadUserById(Integer.valueOf(uid));
 		req.setAttribute("user", user);
 		req.getRequestDispatcher("view/showDetails.jsp").forward(req, resp);
 	}
@@ -284,7 +284,8 @@ public class MainServlet extends HttpServlet{
 		String url = req.getParameter("url");
 		String isshow = req.getParameter("isshow");
 		String parentid = req.getParameter("parentid");
-		int i = userModel.addMenu(name, url, Integer.valueOf(isshow), Integer.valueOf(parentid));
+		Menu menu = new Menu(name, url, Integer.valueOf(isshow), Integer.valueOf(parentid));
+		int i = userModel.addMenu(menu);
 		if(i == 1){
 			req.setAttribute("msg", "添加成功！");
 			//添加成功 跳转到菜单列表界面
@@ -414,7 +415,7 @@ public class MainServlet extends HttpServlet{
 	public void loadAllDept(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		List<Dept> deptList = userModel.loadAllDept();
-		deptList.add(0, new Dept(-1, "请选择部门", null));
+		deptList.add(0, new Dept(-1, "请选择部门"));
 		resp.setCharacterEncoding("utf-8");
 		//JSONArray.fromObject(deptList).toString()
 		resp.getWriter().write(JSON.toJSONString(deptList));

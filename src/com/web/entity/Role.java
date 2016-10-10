@@ -11,6 +11,10 @@ public class Role implements Serializable{
 
 	public Role() {}
 
+	public Role(String rname) {
+		this.rname = rname;
+	}
+
 	public Role(int rid, String rname) {
 		this.rid = rid;
 		this.rname = rname;

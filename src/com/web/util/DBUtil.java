@@ -13,36 +13,47 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 
-public class DBUtil {
+
+public class DBUtil<T> {
 	
-	private static String DRIVERCLASS;
+	public static SessionFactory sessionFactory;
 	
-	private static String URL;
 	
-	private static String USER;
-	
-	private static String PASSWORD;
+//	private static String DRIVERCLASS;
+//	
+//	private static String URL;
+//	
+//	private static String USER;
+//	
+//	private static String PASSWORD;
 	
 	/**
 	 * 静态初始化块 当这个类第一次被访问的时候执行
 	 */
 	static{
-		Properties p = new Properties();
-		InputStream in = null;
-		try {
-			in = DBUtil.class.getResourceAsStream("/com/web/util/db.properties");
-			p.load(in);
-			
-			DRIVERCLASS = p.getProperty("driverClass");
-			URL = p.getProperty("url");
-			USER = p.getProperty("user");
-			PASSWORD = p.getProperty("password");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Configuration config = new Configuration().configure("com/web/hbm/hibernate.cfg.xml");
+		sessionFactory = config.buildSessionFactory();
+//		Properties p = new Properties();
+//		InputStream in = null;
+//		try {
+//			in = DBUtil.class.getResourceAsStream("/com/web/util/db.properties");
+//			p.load(in);
+//			
+//			DRIVERCLASS = p.getProperty("driverClass");
+//			URL = p.getProperty("url");
+//			USER = p.getProperty("user");
+//			PASSWORD = p.getProperty("password");
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 	}
 	
 	/**
@@ -51,105 +62,83 @@ public class DBUtil {
 	 */
 	public static Connection getConnection(){
 		Connection conn = null;
-		try {
-			Class.forName(DRIVERCLASS);
-			conn = DriverManager.getConnection(URL, USER, PASSWORD);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		conn = sessionFactory.openSession().connection();
 		return conn;
 	}
 	
 	/**
-	 * 通用的DML执行方法，支持预处理
-	 * 注意：当sql语句中有?时，则必须传入相同个数的值组成的数组。
-	 * @param sql
-	 * @param params
-	 * @return 执行成功返回true
+	 * 通过主键查询一个对象
+	 * @param c
+	 * @param id
+	 * @return
 	 */
-	public static boolean executeDML(String sql, Object[] params){
-		Connection conn = null;
-		//预处理 预编译 支持占位符? 占位符只能代替一个值  推荐使用
-		PreparedStatement ps = null;
-		boolean b = false;
-		try {
-			conn = DBUtil.getConnection();
-			ps = conn.prepareStatement(sql);
-			//sql语句带有问号 需要设置参数
-			if(null != params && params.length > 0){
-				for(int i=0;i<params.length;i++){
-					ps.setObject((i+1), params[i]);
-				}
-			}
-			b = ps.execute();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if(ps != null)ps.close();
-				if(conn != null)conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return b;
+	public T get(Class c, int id){
+		Session session = sessionFactory.openSession();
+		T t = (T)session.get(c, id);
+		session.close();
+		return t;
 	}
 	
 	/**
-	 * 通用的DQL执行方法 支持预处理
-	 * 注意：当sql语句中有?时，则必须传入相同个数的值组成的数组。
-	 * @param sql
-	 * @param params
-	 * @return List<Object[]>
+	 * 新增/保存
+	 * @param obj
+	 * @return
 	 */
-	public static List<Object[]> executeQuery(String sql, Object[] params){
-		Connection conn = null;
-		//预处理 预编译 支持占位符? 占位符只能代替一个值  推荐使用
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		List<Object[]> list = new ArrayList<Object[]>();
-		try {
-			conn = DBUtil.getConnection();
-			ps = conn.prepareStatement(sql);
-			//sql语句带有问号 需要设置参数
-			if(null != params && params.length > 0){
-				for(int i=0;i<params.length;i++){
-					ps.setObject((i+1), params[i]);
-				}
-			}
-			rs = ps.executeQuery();
-			//处理结果集
-			//获取结果集的列数
-			int columnCount = rs.getMetaData().getColumnCount();
-			Object[] os = null;
-			while(rs.next()){
-				os = new Object[columnCount];
-				for(int i=0;i<columnCount;i++){
-					os[i] = rs.getObject(i+1);
-				}
-				list.add(os);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if(rs != null)rs.close();
-				if(ps != null)ps.close();
-				if(conn != null)conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
+	public boolean save(T t){
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		tx.begin();
+		session.save(t);
+		tx.commit();
+		session.close();
+		return true;
+	}
+	
+	/**
+	 * 修改/保存
+	 * @param obj
+	 * @return
+	 */
+	public boolean update(T t){
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		tx.begin();
+		session.update(t);
+		tx.commit();
+		session.close();
+		return true;
+	}
+	
+	/**
+	 * 通过主键删除
+	 * @param obj
+	 * @return
+	 */
+	public boolean delete(T t){
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		tx.begin();
+		session.delete(t);
+		tx.commit();
+		session.close();
+		return true;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<T> sqlQuery(Class c, String sql, Object... params){
+		Session session = DBUtil.sessionFactory.openSession();
+		SQLQuery sqlQuery = session.createSQLQuery(sql).addEntity(c);
+		if(null != params && params.length > 0){
+			for(int i=0;i<params.length;i++){
+				sqlQuery.setParameter(i, params[i]);
 			}
 		}
+		List<T> list = sqlQuery.list();
+		session.close();
 		return list;
 	}
 	
-	
-	
-	
-	
 	//私有构造方法 防止创建此类的对象
-	private DBUtil(){}
+	public DBUtil(){}
 
 }

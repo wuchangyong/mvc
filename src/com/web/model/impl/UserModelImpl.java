@@ -2,7 +2,19 @@ package com.web.model.impl;
 
 import java.util.List;
 
+import com.web.dao.DeptDao;
+import com.web.dao.EmpDao;
+import com.web.dao.JobDao;
+import com.web.dao.MenuDao;
+import com.web.dao.RoleDao;
+import com.web.dao.RoleMenuDao;
 import com.web.dao.UserDao;
+import com.web.dao.impl.DeptDaoImpl;
+import com.web.dao.impl.EmpDaoImpl;
+import com.web.dao.impl.JobDaoImpl;
+import com.web.dao.impl.MenuDaoImpl;
+import com.web.dao.impl.RoleDaoImpl;
+import com.web.dao.impl.RoleMenuDaoImpl;
 import com.web.dao.impl.UserDaoImpl;
 import com.web.entity.Dept;
 import com.web.entity.Job;
@@ -18,6 +30,18 @@ public class UserModelImpl implements UserModel{
 
 	//模型层持有一个DAO层对象
 	private UserDao userDao = new UserDaoImpl();
+	//模型层持有一个DAO层对象
+	private JobDao jobDao = new JobDaoImpl();
+	//模型层持有一个DAO层对象
+	private MenuDao menuDao = new MenuDaoImpl();
+	//模型层持有一个DAO层对象
+	private DeptDao deptDao = new DeptDaoImpl();
+	//模型层持有一个DAO层对象
+	private RoleDao roleDao = new RoleDaoImpl();
+	//模型层持有一个DAO层对象
+	private RoleMenuDao roleMenuDao = new RoleMenuDaoImpl();
+	//模型层持有一个DAO层对象
+	private EmpDao empDao = new EmpDaoImpl();
 	
 	/**
 	 * 通过用户名加载一个用户对象（登录）
@@ -33,8 +57,8 @@ public class UserModelImpl implements UserModel{
 	 * @param uid 用户主键
 	 * @return  
 	 */
-	public User loadUserByName(int uid){
-		return userDao.loadUserByName(uid);
+	public User loadUserById(int uid){
+		return userDao.loadUserById(uid);
 	}
 	
 	/**
@@ -59,7 +83,7 @@ public class UserModelImpl implements UserModel{
 	 * @return
 	 */
 	public List<Menu> loadMenusByUid(int uid){
-		return userDao.loadMenusByUid(uid);
+		return menuDao.loadMenusByUid(uid);
 	}
 	
 	/**
@@ -67,7 +91,7 @@ public class UserModelImpl implements UserModel{
 	 * @return
 	 */
 	public Page<MenuVo> loadAllMenus(int pageNo, int pageSize){
-		return userDao.loadAllMenus(pageNo, pageSize);
+		return menuDao.loadAllMenus(pageNo, pageSize);
 	}
 	
 	/**
@@ -75,7 +99,7 @@ public class UserModelImpl implements UserModel{
 	 * @return
 	 */
 	public List<Menu> load12Menus(){
-		return userDao.load12Menus();
+		return menuDao.load12Menus();
 	}
 	
 	/**
@@ -86,10 +110,11 @@ public class UserModelImpl implements UserModel{
 	 * @param parentid 父级菜单ID
 	 * @return 返回1表示添加成功 返回2表示父级菜单不存在
 	 */
-	public int addMenu(String name,String url,int isshow,int parentid){
-		Menu m = userDao.loadMenuById(parentid);
+	public int addMenu(Menu menu){
+		Menu m = menuDao.loadMenuById(menu.getParentid());
 		if(null != m){
-			userDao.addMenu(name, url, isshow, m.getLevel()+1, parentid);
+			menu.setLevel(m.getLevel()+1);
+			menuDao.addMenu(menu);
 			return 1;
 		}else{
 			return 2;
@@ -101,7 +126,7 @@ public class UserModelImpl implements UserModel{
 	 * @return
 	 */
 	public List<Role> loadAllRoles(){
-		return userDao.loadAllRoles();
+		return roleDao.loadAllRoles();
 	}
 	
 	/**
@@ -110,7 +135,7 @@ public class UserModelImpl implements UserModel{
 	 * @return
 	 */
 	public List<Object[]> loadRoleMenuByRoleId(int rid){
-		return userDao.loadRoleMenuByRoleId(rid);
+		return roleDao.loadRoleMenuByRoleId(rid);
 	}
 	
 	/**
@@ -119,7 +144,7 @@ public class UserModelImpl implements UserModel{
 	 * @return
 	 */
 	public Role loadRoleById(int rid){
-		return userDao.loadRoleById(rid);
+		return roleDao.loadRoleById(rid);
 	}
 	
 	/**
@@ -128,7 +153,7 @@ public class UserModelImpl implements UserModel{
 	 * @param mids
 	 */
 	public void editRoleMenu(int rid, String[] mids){
-		userDao.editRoleMenu(rid, mids);
+		roleMenuDao.editRoleMenu(rid, mids);
 	}
 	
 	/**
@@ -138,7 +163,7 @@ public class UserModelImpl implements UserModel{
 	 * @return 返回true表示有权限 返回false表示无权限
 	 */
 	public boolean checkUserMenu(int uid, String uri){
-		return userDao.checkUserMenu(uid, uri);
+		return roleMenuDao.checkUserMenu(uid, uri);
 	}
 	
 	/**
@@ -148,7 +173,7 @@ public class UserModelImpl implements UserModel{
 	 * @return
 	 */
 	public Page<EmployeeVo> loadEmployeeByPage(int pageNo, int pageSize, String searchName,String searchJob,String searchDept){
-		return userDao.loadEmployeeByPage(pageNo, pageSize, searchName, searchJob, searchDept);
+		return empDao.loadEmployeeByPage(pageNo, pageSize, searchName, searchJob, searchDept);
 	}
 	
 	/**
@@ -156,7 +181,7 @@ public class UserModelImpl implements UserModel{
 	 * @return
 	 */
 	public List<Job> loadAllJob(){
-		return userDao.loadAllJob();
+		return jobDao.loadAllJob();
 	}
 	
 	/**
@@ -164,7 +189,7 @@ public class UserModelImpl implements UserModel{
 	 * @return
 	 */
 	public List<Dept> loadAllDept(){
-		return userDao.loadAllDept();
+		return deptDao.loadAllDept();
 	}
 	
 }

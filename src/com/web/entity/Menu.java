@@ -25,6 +25,13 @@ public class Menu implements Serializable{
 		this.name = name;
 	}
 
+	public Menu(String name, String url, int isshow, int parentid) {
+		this.name = name;
+		this.url = url;
+		this.isshow = isshow;
+		this.parentid = parentid;
+	}
+
 	public Menu(int mid, String name, String url, int isshow, int level,
 			int parentid) {
 		this.mid = mid;

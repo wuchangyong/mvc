@@ -10,30 +10,35 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class Job implements Serializable{
 
-	private int jid;
+	private int jobid;
 	
-	private String jname;
+	private String jobName;
 
 	public Job() {}
 
-	public Job(int jid, String jname) {
-		this.jid = jid;
-		this.jname = jname;
+	public Job(String jobName) {
+		this.jobName = jobName;
 	}
 
-	public int getJid() {
-		return jid;
+	public Job(int jobid, String jobName) {
+		this.jobid = jobid;
+		this.jobName = jobName;
 	}
 
-	public void setJid(int jid) {
-		this.jid = jid;
+	public int getJobid() {
+		return jobid;
 	}
 
-	public String getJname() {
-		return jname;
+	public void setJobid(int jobid) {
+		this.jobid = jobid;
 	}
 
-	public void setJname(String jname) {
-		this.jname = jname;
+	public String getJobName() {
+		return jobName;
 	}
+
+	public void setJobName(String jobName) {
+		this.jobName = jobName;
+	}
+
 }

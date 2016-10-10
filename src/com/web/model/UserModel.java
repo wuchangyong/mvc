@@ -26,7 +26,7 @@ public interface UserModel {
 	 * @param uid 用户主键
 	 * @return  
 	 */
-	public User loadUserByName(int uid);
+	public User loadUserById(int uid);
 
 	
 	/**
@@ -67,7 +67,7 @@ public interface UserModel {
 	 * @param isshow 是否在欢迎界面展示
 	 * @param parentid 父级菜单ID
 	 */
-	public int addMenu(String name,String url,int isshow,int parentid);
+	public int addMenu(Menu menu);
 	
 	/**
 	 * 加载所有角色

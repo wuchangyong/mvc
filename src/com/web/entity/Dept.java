@@ -10,42 +10,34 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class Dept implements Serializable{
 
-	private int deptid;
+	private int did;
 	
-	private String deptName;
-	
-	private String location;
+	private String dname;
 
 	public Dept() {}
 
-	public Dept(int deptid, String deptName, String location) {
-		this.deptid = deptid;
-		this.deptName = deptName;
-		this.location = location;
+	public Dept(String dname) {
+		this.dname = dname;
 	}
 
-	public int getDeptid() {
-		return deptid;
+	public Dept(int did, String dname) {
+		this.did = did;
+		this.dname = dname;
 	}
 
-	public void setDeptid(int deptid) {
-		this.deptid = deptid;
+	public int getDid() {
+		return did;
 	}
 
-	public String getDeptName() {
-		return deptName;
+	public void setDid(int did) {
+		this.did = did;
 	}
 
-	public void setDeptName(String deptName) {
-		this.deptName = deptName;
+	public String getDname() {
+		return dname;
 	}
 
-	public String getLocation() {
-		return location;
+	public void setDname(String dname) {
+		this.dname = dname;
 	}
-
-	public void setLocation(String location) {
-		this.location = location;
-	}
-
 }

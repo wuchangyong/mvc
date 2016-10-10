@@ -32,25 +32,25 @@ public class LoginFilter implements Filter{
 		if("login".equals(methodName) || "reg".equals(methodName) || "logout".equals(methodName)){
 			chain.doFilter(req, resp);
 		}else{
-			User user = (User)req.getSession().getAttribute("loginUser");
-			if(null != user){
-				String uri = req.getServletPath();
-				uri = uri.substring(1);
-				UserModel um = new UserModelImpl();
-				boolean b = um.checkUserMenu(user.getUid(), uri);
-				if(b){
+//			User user = (User)req.getSession().getAttribute("loginUser");
+//			if(null != user){
+//				String uri = req.getServletPath();
+//				uri = uri.substring(1);
+//				UserModel um = new UserModelImpl();
+//				boolean b = um.checkUserMenu(user.getUid(), uri);
+//				if(b){
 					chain.doFilter(req, resp);
-				}else{
-					//req.setAttribute("noRightError", "对不起,你没有访问此资源的权限!");
-					//req.getRequestDispatcher("view/noRightError.jsp").forward(req, resp);
-					resp.getWriter().write("<script type='text/javascript'>alert('对不起,你没有访问此资源的权限!');</script>");
-					resp.getWriter().flush();
-				}
-			}else{
-				req.setAttribute("loginError", "对不起，请先登录！");
-				resp.getWriter().write("<script type='text/javascript'>window.top.location.href='view/login.jsp';</script>");
-				resp.getWriter().flush();
-			}
+//				}else{
+//					//req.setAttribute("noRightError", "对不起,你没有访问此资源的权限!");
+//					//req.getRequestDispatcher("view/noRightError.jsp").forward(req, resp);
+//					resp.getWriter().write("<script type='text/javascript'>alert('对不起,你没有访问此资源的权限!');</script>");
+//					resp.getWriter().flush();
+//				}
+//			}else{
+//				req.setAttribute("loginError", "对不起，请先登录！");
+//				resp.getWriter().write("<script type='text/javascript'>window.top.location.href='view/login.jsp';</script>");
+//				resp.getWriter().flush();
+//			}
 		}
 	}
 
